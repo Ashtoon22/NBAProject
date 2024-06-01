@@ -1,0 +1,58 @@
+-- database: c:\Users\Ashton Butler\OneDrive\Documents\GitHub\NBAProject\nba.sqlite
+
+-- Use the ▷ button in the top right corner to run the entire file.
+
+
+
+
+SELECT player_name, count(season) NumberofSeasons from draft_combine_stats
+GROUP BY player_name
+order by NumberofSeasons DESC;
+
+
+SELECT height_wo_shoes, player_name FROM draft_combine_stats
+ORDER BY height_wo_shoes DESC
+LIMIT 3;
+
+SELECT nickname, year_founded FROM team_history
+ORDER BY year_founded ASC;
+
+SELECT 
+    first_name,
+    last_name, 
+    count(official_id) as Number
+FROM game_summary as gs
+JOIN officials as offic
+ON gs.game_id = offic.game_id
+WHERE season = 2022
+GROUP BY official_id
+order by count(official_id) desc
+limit 1;
+
+
+
+SELECT 
+    pts_home,
+    team_id_home,
+    team_nickname_home,
+    pts_away,  
+    team_id_away, 
+    team_nickname_away,
+    substr(game_date_est,1, 4) as GameYear from line_score;
+
+SELECT
+    COUNT(team_id_home) AS HomeGamesWon,
+    team_nickname_home,
+    team_id_away,
+    team_nickname_away
+FROM line_score
+WHERE (pts_home - pts_away) > 0
+GROUP BY team_nickname_home
+ORDER BY HomeGamesWon DESC;
+
+
+
+
+
+
+
