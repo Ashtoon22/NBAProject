@@ -4,19 +4,21 @@
 
 
 
-
+#The longest serving player
 SELECT player_name, count(season) NumberofSeasons from draft_combine_stats
 GROUP BY player_name
 order by NumberofSeasons DESC;
 
-
+#Top 3 tallest players by height without shoes
 SELECT height_wo_shoes, player_name FROM draft_combine_stats
 ORDER BY height_wo_shoes DESC
 LIMIT 3;
 
+#Oldest Team
 SELECT nickname, year_founded FROM team_history
 ORDER BY year_founded ASC;
 
+#The official who was at the most games in 2022
 SELECT 
     first_name,
     last_name, 
@@ -29,8 +31,7 @@ GROUP BY official_id
 order by count(official_id) desc
 limit 1;
 
-
-
+#take the date/year/time and create a column for the year only.
 SELECT 
     pts_home,
     team_id_home,
@@ -40,6 +41,7 @@ SELECT
     team_nickname_away,
     substr(game_date_est,1, 4) as GameYear from line_score;
 
+#The team to win the most home games.
 SELECT
     COUNT(team_id_home) AS HomeGamesWon,
     team_nickname_home,
